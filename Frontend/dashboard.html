@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SkillHub Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    margin:0;
+}
+
+.navbar{
+    background:#333;
+    color:white;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.navbar button{
+    padding:8px 15px;
+    margin-left:10px;
+    border:none;
+    background:#4CAF50;
+    color:white;
+    cursor:pointer;
+}
+
+.container{
+    padding:30px;
+}
+
+.skill-card{
+    background:white;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:8px;
+    box-shadow:0 0 5px rgba(0,0,0,0.1);
+}
+
+.skill-name{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.user-name{
+    color:gray;
+    margin-top:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div>
+<h2>SkillHub Dashboard</h2>
+</div>
+
+<div>
+<button onclick="goToCreate()">Create Skill</button>
+<button onclick="logout()">Logout</button>
+</div>
+
+</div>
+
+
+<div class="container">
+
+<h3>Available Skills</h3>
+
+<div id="skillsContainer"></div>
+
+</div>
+
+
+
+<script>
+
+/* ---------- Load Skills from backend ---------- */
+
+async function loadSkills(){
+
+const token = localStorage.getItem("token");
+
+if(!token){
+
+alert("Please login first");
+
+window.location = "/signin";
+
+return;
+
+}
+
+try{
+
+const response = await axios.get(
+"http://localhost:3000/api/dashboard",
+{
+headers:{
+Authorization: token
+}
+}
+);
+
+const skills = response.data.skills;
+
+const container = document.getElementById("skillsContainer");
+
+container.innerHTML = "";
+
+skills.forEach(skill => {
+
+const card = document.createElement("div");
+
+card.className = "skill-card";
+
+card.innerHTML = `
+<div class="skill-name">${skill.skill}</div>
+<div class="user-name">Posted by: ${skill.userId.username}</div>
+`;
+
+container.appendChild(card);
+
+});
+
+}catch(error){
+
+console.log(error);
+
+alert("Error loading skills");
+
+}
+
+}
+
+
+/* ---------- Navigation ---------- */
+
+function goToCreate(){
+
+window.location = "/createskill";
+
+}
+
+
+function logout(){
+
+localStorage.removeItem("token");
+
+window.location = "/signin";
+
+}
+
+
+/* ---------- Load dashboard when page opens ---------- */
+
+loadSkills();
+
+</script>
+
+</body>
+
+</html>

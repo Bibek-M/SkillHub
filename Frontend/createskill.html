@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Skill</title>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    width:350px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#45a049;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Create Skill</h2>
+
+<input 
+type="text" 
+id="skill" 
+placeholder="Enter your skill"
+/>
+
+<button onclick="createSkill()">Create Skill</button>
+
+</div>
+
+<script>
+
+async function createSkill(){
+
+const skill = document.getElementById("skill").value;
+
+const token = localStorage.getItem("token");
+
+if(!token){
+alert("Please login first");
+window.location = "/signin.html";
+return;
+}
+
+try{
+
+await axios.post(
+"http://localhost:3000/createSkill",
+{
+skill: skill
+},
+{
+headers:{
+Authorization: token
+}
+}
+);
+
+alert("Skill created successfully");
+
+window.location = "/dashboard";
+
+}catch(error){
+
+alert("Error creating skill");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
