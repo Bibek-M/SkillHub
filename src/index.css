@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Figtree:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 30% 97%;
+    --foreground: 207 60% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 207 60% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 207 60% 14%;
+
+    --primary: 197 55% 39%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 207 40% 22%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 93%;
+    --muted-foreground: 210 15% 45%;
+
+    --accent: 173 45% 55%;
+    --accent-foreground: 207 60% 14%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 88%;
+    --input: 210 20% 88%;
+    --ring: 197 55% 39%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 207 60% 14%;
+    --sidebar-foreground: 210 20% 93%;
+    --sidebar-primary: 197 55% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 207 40% 22%;
+    --sidebar-accent-foreground: 210 20% 93%;
+    --sidebar-border: 207 40% 22%;
+    --sidebar-ring: 197 55% 39%;
+
+    --gradient-ocean: linear-gradient(135deg, hsl(207, 60%, 14%), hsl(197, 55%, 39%));
+    --gradient-teal: linear-gradient(135deg, hsl(197, 55%, 39%), hsl(173, 45%, 55%));
+    --gradient-hero: linear-gradient(135deg, hsl(207, 60%, 14%) 0%, hsl(207, 40%, 22%) 50%, hsl(197, 55%, 39%) 100%);
+    --shadow-card: 0 4px 20px -4px hsl(207 60% 14% / 0.08);
+    --shadow-elevated: 0 8px 30px -8px hsl(207 60% 14% / 0.15);
+
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Figtree', sans-serif;
+  }
+
+  .dark {
+    --background: 207 60% 8%;
+    --foreground: 210 20% 93%;
+    --card: 207 60% 12%;
+    --card-foreground: 210 20% 93%;
+    --popover: 207 60% 12%;
+    --popover-foreground: 210 20% 93%;
+    --primary: 173 45% 55%;
+    --primary-foreground: 207 60% 14%;
+    --secondary: 207 40% 22%;
+    --secondary-foreground: 210 20% 93%;
+    --muted: 207 40% 18%;
+    --muted-foreground: 210 15% 55%;
+    --accent: 197 55% 39%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 207 40% 22%;
+    --input: 207 40% 22%;
+    --ring: 173 45% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer utilities {
+  .gradient-ocean {
+    background: var(--gradient-ocean);
+  }
+  .gradient-teal {
+    background: var(--gradient-teal);
+  }
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
